@@ -18,9 +18,20 @@ public class AutorDao {
         this.manager.persist(autor);
     }
 
-    @Transactional
+    @Transactional(readOnly = false)
     public void update(Autor autor){
         this.manager.merge(autor);
+    }
+
+    @Transactional(readOnly = false)
+    public void delete(Long id){
+
+        this.manager.remove(this.manager.getReference(Autor.class, id));
+    }
+
+    @Transactional(readOnly = true)
+    public Autor findById(Long id){
+        return this.manager.find(Autor.class, id);
     }
 
 }

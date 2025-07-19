@@ -20,7 +20,20 @@ public class AutorController {
 
     @PutMapping
     public Autor atualizar(@RequestBody Autor autor){
-        autorDao.update(autor); // Hibernate salva e atribui o ID do banco ao objeto autor
+        autorDao.update(autor);
         return autor;
     }
+
+    // /autores/10
+    @DeleteMapping("{id}")
+    public String remover(@PathVariable Long id){
+        autorDao.delete(id);
+        return "Autor id = " + id + " foi excluido com sucesso";
+    }
+
+    @GetMapping("{id}")
+    public Autor getById(@PathVariable Long id){
+        return autorDao.findById(id);
+    }
+
 }
