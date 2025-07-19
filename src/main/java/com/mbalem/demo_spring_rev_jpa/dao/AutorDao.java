@@ -18,4 +18,9 @@ public class AutorDao {
         this.manager.persist(autor);
     }
 
+    @Transactional
+    public void update(Autor autor){
+        this.manager.merge(autor);
+    }
+
 }

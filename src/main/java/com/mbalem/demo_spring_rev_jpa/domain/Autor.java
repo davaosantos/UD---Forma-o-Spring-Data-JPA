@@ -44,6 +44,9 @@ public class Autor implements Serializable {
         this.sobrenome = sobrenome;
     }
 
+    public Autor() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
