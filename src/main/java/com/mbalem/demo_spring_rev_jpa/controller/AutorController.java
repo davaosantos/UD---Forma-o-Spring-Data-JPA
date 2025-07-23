@@ -5,6 +5,8 @@ import com.mbalem.demo_spring_rev_jpa.domain.Autor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("autores")
 public class AutorController {
@@ -34,6 +36,21 @@ public class AutorController {
     @GetMapping("{id}")
     public Autor getById(@PathVariable Long id){
         return autorDao.findById(id);
+    }
+
+    @GetMapping
+    public List<Autor> getAll(){
+        return autorDao.findAll();
+    }
+
+    @GetMapping("nomeOrSobrenome")
+    public List<Autor> getAllByNomeOrSobrenome(@RequestParam("termo") String termo){
+        return autorDao.findAllByNomeOrSobrenome(termo);
+    }
+
+    @GetMapping("total")
+    public Long getTotalAutores(){
+        return autorDao.getTotalElements();
     }
 
 }
