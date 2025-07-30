@@ -20,6 +20,10 @@ public class Autor implements Serializable {
     @Column(name = "sobrenome", length = 45, nullable = false)
     private String sobrenome;
 
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "id_info")
+    private InfoAutor infoAutor;
+
     public Long getId() {
         return id;
     }
