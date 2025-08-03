@@ -51,6 +51,15 @@ public class Autor implements Serializable {
     public Autor() {
     }
 
+
+    public InfoAutor getInfoAutor() {
+        return infoAutor;
+    }
+
+    public void setInfoAutor(InfoAutor infoAutor) {
+        this.infoAutor = infoAutor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
