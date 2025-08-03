@@ -3,6 +3,7 @@ package com.mbalem.demo_spring_rev_jpa.controller;
 import com.mbalem.demo_spring_rev_jpa.dao.AutorDao;
 import com.mbalem.demo_spring_rev_jpa.domain.Autor;
 import com.mbalem.demo_spring_rev_jpa.domain.InfoAutor;
+import com.mbalem.demo_spring_rev_jpa.dto.AutorInfoDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,6 +63,11 @@ public class AutorController {
     @GetMapping("info")
     public List<Autor> getAutoresByCargo(@RequestParam(value = "cargo") String cargo){
             return autorDao.findByCargo(cargo);
+    }
+
+    @GetMapping("autor-info") // Consulta com retorno projetado apenas de alguns parametros
+    public AutorInfoDAO findAutorInfoById(@RequestParam(value = "id") Long idAutor){
+        return autorDao.findAutorInfoById(idAutor);
     }
 
 }

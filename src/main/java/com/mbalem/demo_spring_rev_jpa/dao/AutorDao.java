@@ -3,6 +3,7 @@ package com.mbalem.demo_spring_rev_jpa.dao;
 
 import com.mbalem.demo_spring_rev_jpa.domain.Autor;
 import com.mbalem.demo_spring_rev_jpa.domain.InfoAutor;
+import com.mbalem.demo_spring_rev_jpa.dto.AutorInfoDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -66,9 +67,10 @@ public class AutorDao {
         return autor;
     }
 
-    @Transactional(readOnly = false)
+    @Transactional(readOnly = true)
     public List<Autor> findByCargo(String cargo){
-        String query = """
+        //Query jpql com tres aspas apenas a partir do java 21
+        String query = """ 
                 select a from Autor a\s
                 where a.infoAutor.cargo like :cargo
                 order by a.nome asc
@@ -77,6 +79,16 @@ public class AutorDao {
         return this.manager.createQuery(query, Autor.class)
                 .setParameter("cargo", montaValueParam(cargo))
                 .getResultList();
+    }
+
+    @Transactional(readOnly = true)
+    public AutorInfoDAO findAutorInfoById(Long id){
+        String query = "select new AutorInfoDAO(a.nome, a.sobrenome, a.infoAutor.cargo, a.infoAutor.bio) from Autor a " //Query jpql para java anterior ao 21
+                + "where a.id = :id ";
+
+        return this.manager.createQuery(query, AutorInfoDAO.class)
+                .setParameter("id", + id)
+                .getSingleResult();
     }
 
     private static String montaValueParam(String param) {
