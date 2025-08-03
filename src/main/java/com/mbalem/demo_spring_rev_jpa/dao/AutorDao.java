@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class AutorDao {
 
-    @PersistenceContext
+    @PersistenceContext // Classe para injeção de um EntityManager
     private EntityManager manager;
 
     @Transactional
