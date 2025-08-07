@@ -1,1 +1,1 @@
-Projeto referente ao módulo de Data Acces object do curso de Spring-Data
+Projeto referente ao estudo e prática de conceitos sobre Spring Data JPA
