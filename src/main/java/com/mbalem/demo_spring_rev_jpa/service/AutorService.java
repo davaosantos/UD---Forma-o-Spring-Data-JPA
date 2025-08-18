@@ -1,41 +1,59 @@
-package com.mbalem.demo_spring_rev_jpa.dao;
+package com.mbalem.demo_spring_rev_jpa.service;
 
 
 import com.mbalem.demo_spring_rev_jpa.domain.Autor;
 import com.mbalem.demo_spring_rev_jpa.domain.InfoAutor;
 import com.mbalem.demo_spring_rev_jpa.dto.AutorInfoDAO;
+import com.mbalem.demo_spring_rev_jpa.repository.AutorRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
-public class AutorDao {
+@Service
+public class AutorService {
+
+    @Autowired
+    private AutorRepository autorRepository;
 
     @PersistenceContext // Classe para injeção de um EntityManager
     private EntityManager manager;
 
+//    @Transactional
+//    public void save(Autor autor){
+//        this.manager.persist(autor);
+//    }
+
     @Transactional
     public void save(Autor autor){
-        this.manager.persist(autor);
+        this.autorRepository.save(autor);
     }
 
     @Transactional(readOnly = false)
     public void update(Autor autor){
-        this.manager.merge(autor);
+        this.autorRepository.save(autor);
     }
+
+//    @Transactional(readOnly = false)
+//    public void delete(Long id){
+//        this.manager.remove(this.manager.getReference(Autor.class, id));
+//    }
 
     @Transactional(readOnly = false)
     public void delete(Long id){
-
-        this.manager.remove(this.manager.getReference(Autor.class, id));
+        this.autorRepository.deleteById(id);
     }
 
     @Transactional(readOnly = true)
     public Autor findById(Long id){
-        return this.manager.find(Autor.class, id);
+//        return this.autorRepository.findById(id).get();
+//        return this.autorRepository.findById(id).orElseGet(Autor::new);
+//        return this.autorRepository.findById(id).orElse(new Autor());
+        return this.autorRepository.findById(id).orElseThrow(() -> new RuntimeException("Nao encontrado o id : " + id));
     }
 
     @Transactional(readOnly = true)
