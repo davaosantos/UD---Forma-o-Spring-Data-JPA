@@ -1,39 +1,14 @@
 package com.mbalem.demo_spring_rev_jpa.dto;
 
-public class AutorInfoDAO {
-    private String nomeCompleto;
+import org.springframework.beans.factory.annotation.Value;
 
-    private String cargo;
+public interface AutorInfoDAO {
 
-    private String bio;
+    @Value("#{target.nome + ' ' + target.sobrenome}")
+    String getNomeCompleto();
 
-    public AutorInfoDAO(String nome, String sobrenome, String cargo, String bio) {
-        this.nomeCompleto = nome + " " + sobrenome;
-        this.cargo = cargo;
-        this.bio = bio;
-    }
+    String getCargo();
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
+    String getBio();
 
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
 }
