@@ -31,4 +31,15 @@ public class InfoAutorService {
                 .withMatcher("cargo", ExampleMatcher.GenericPropertyMatchers.contains());
         return this.infoAutorRepository.findAll(Example.of(infoAutor, cargoMatcher));
     }
+
+    public List<InfoAutor> findAllContainsCargoEmpresa(String cargo, String empresa){
+        InfoAutor infoAutor = new InfoAutor();
+        infoAutor.setCargo(cargo);
+        infoAutor.setBio(empresa);
+        ExampleMatcher cargoMatcher = ExampleMatcher.matchingAll()
+                .withMatcher("cargo", ExampleMatcher.GenericPropertyMatchers.startsWith())
+                .withMatcher("bio", ExampleMatcher.GenericPropertyMatchers.contains());
+
+        return this.infoAutorRepository.findAll(Example.of(infoAutor, cargoMatcher));
+    }
 }

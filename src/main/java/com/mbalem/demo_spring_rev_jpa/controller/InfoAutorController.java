@@ -27,4 +27,10 @@ public class InfoAutorController {
         return infoAutorService.findAllContainsCargo(cargo);
     }
 
+    @GetMapping("cargo/{cargo}/empresa/{empresa}")
+    private List<InfoAutor> getContainsCargoAndEmpresa(@PathVariable("cargo") String cargo,
+                                                       @PathVariable("empresa") String empresa){
+        return infoAutorService.findAllContainsCargoEmpresa(cargo, empresa);
+    }
+
 }
