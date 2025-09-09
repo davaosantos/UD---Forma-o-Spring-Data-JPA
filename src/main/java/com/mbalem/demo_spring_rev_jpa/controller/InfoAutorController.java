@@ -33,4 +33,9 @@ public class InfoAutorController {
         return infoAutorService.findAllContainsCargoEmpresa(cargo, empresa);
     }
 
+    @GetMapping("bio/{bio}")
+    public InfoAutor getFromBio(@PathVariable("bio") String bioAutor){
+        return infoAutorService.findFromBio(bioAutor);
+    }
+
 }
