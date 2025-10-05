@@ -23,4 +23,20 @@ public class CategoriaService {
     public Categoria findByTitulo(String titulo){
         return this.categoriaRepository.findByTitulo(titulo).orElseGet(Categoria::new);
     }
+
+    @Transactional(readOnly = true)
+    public List<Categoria> findByInicioTitulo(String titulo){
+        return this.categoriaRepository.findByTituloStartsWith(titulo);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Categoria> findByTitulos(List<String> titulos){
+        return this.categoriaRepository.findByTituloIn(titulos);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Categoria> findAllOrderByTituloAsc(){
+        return this.categoriaRepository.findByOrderByTituloAsc();
+    }
+
 }
