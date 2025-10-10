@@ -45,5 +45,10 @@ public class PostService {
         return this.postRepository.save(post);
     }
 
+    @Transactional(readOnly = true)
+    public List<Post> findAllByCategoriaAndAutorId(String categoria, Long autorId){
+        return this.postRepository.findByCategoriasTituloAndAutorId(categoria, autorId);
+    }
+
 
 }
