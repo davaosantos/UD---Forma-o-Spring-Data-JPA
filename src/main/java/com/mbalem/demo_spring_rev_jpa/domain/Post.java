@@ -1,8 +1,10 @@
 package com.mbalem.demo_spring_rev_jpa.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,7 +29,13 @@ public class Post implements Serializable {
         joinColumns = @JoinColumn(name = "id_post"), inverseJoinColumns = @JoinColumn(name = "id_categoria")
 
     )
+
     private List<Categoria> categorias;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "data_publicacao")
+    private LocalDate dataPublicacao;
+
 
     public Long getId() {
         return id;
@@ -59,6 +67,14 @@ public class Post implements Serializable {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public LocalDate getDataPublicacao() {
+        return dataPublicacao;
+    }
+
+    public void setDataPublicacao(LocalDate dataPublicacao) {
+        this.dataPublicacao = dataPublicacao;
     }
 
     @Override
